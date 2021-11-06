@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-        //be sure to replace "bhavukm" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "kswetha02/train-schedule"
     }
     stages {
@@ -25,21 +24,5 @@ pipeline {
                 }
             }
         }
-        stage('Push Docker Image') {
-            when {
-                branch 'master'
-            }
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
-                    }
-                }
-            }
-        }
-      
-       
-        }
-    }
+}
 }
